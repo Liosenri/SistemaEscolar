@@ -5,7 +5,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Escuela {
+interface FuncionalidadEscuela {
+    public void agregarAlumno();
+    public void agregarGrupo();
+    public void agregarMateria();
+}
+
+public class Escuela implements FuncionalidadEscuela {
     private ArrayList<String> materias = new ArrayList<String>();
     private ArrayList<Grupo> grupos = new ArrayList<Grupo>();
 
@@ -245,6 +251,8 @@ public class Escuela {
             while (true) {
                 String gruposString = gruposInput.readObject().toString();
                 String[] splitGrupoString = gruposString.split("-");
+                // splitGrupoString[0] = Nombre del grupo
+                // splitGrupoString[1] = La materia del grupo
                 Grupo grupo = new Grupo(splitGrupoString[0], splitGrupoString[1]);
                 grupos.add(grupo);
             }
@@ -267,6 +275,10 @@ public class Escuela {
                 String[] splitAlumnoString = alumnoString.split("-");
                 for (Grupo grupo : grupos) {
                     if(grupo.getNombre().equals(splitAlumnoString[0])) {
+                        // splitAlumnoString[0] = Nombre del grupp
+                        // splitAlumnoString[1] = Numero de control
+                        // splitAlumnoString[2] = Nombre
+                        // splitAlumnoString[0] = Edad
                         grupo.getAlumnos().add(new Alumno(splitAlumnoString[1],splitAlumnoString[2],splitAlumnoString[3]));
                     }
                 }
